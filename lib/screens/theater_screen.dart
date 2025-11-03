@@ -9,7 +9,7 @@ class TheaterPage extends StatefulWidget {
 }
 
 class _TheaterPageState extends State<TheaterPage> {
-  String? selectedCity = "Medan"; // Default Medan setelah login
+  String? selectedCity = "Medan"; 
   bool isLoadingLocation = false;
 
   final List<String> cities = [
@@ -38,7 +38,7 @@ class _TheaterPageState extends State<TheaterPage> {
   @override
   void initState() {
     super.initState();
-    _determinePosition(); // otomatis deteksi lokasi saat dibuka
+    _determinePosition(); 
   }
 
   Future<void> _determinePosition() async {
@@ -49,7 +49,7 @@ class _TheaterPageState extends State<TheaterPage> {
       if (!serviceEnabled) {
         setState(() {
           isLoadingLocation = false;
-          selectedCity = "Medan"; // fallback
+          selectedCity = "Medan"; 
         });
         return;
       }
@@ -74,12 +74,12 @@ class _TheaterPageState extends State<TheaterPage> {
         return;
       }
 
-      // Ambil koordinat pengguna
+      
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
 
-      // Deteksi kota manual (mock berdasarkan range koordinat)
+      
       String detectedCity =
           _detectCityByCoordinates(position.latitude, position.longitude);
 
@@ -95,7 +95,6 @@ class _TheaterPageState extends State<TheaterPage> {
     }
   }
 
-  // Fungsi deteksi kota sederhana berdasarkan koordinat
   String _detectCityByCoordinates(double lat, double lon) {
     if (lat > 3.0 && lat < 4.0 && lon > 98.0 && lon < 99.0) return "Medan";
     if (lat > -7.0 && lat < -6.0 && lon > 106.0 && lon < 108.0) return "Jakarta";
@@ -144,7 +143,6 @@ class _TheaterPageState extends State<TheaterPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 🔹 Dropdown Kota
                   Container(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -197,7 +195,7 @@ class _TheaterPageState extends State<TheaterPage> {
                   ),
                   const SizedBox(height: 20),
 
-                  // 🔹 Daftar bioskop
+                  
                   Expanded(
                     child: ListView.builder(
                       itemCount: theaters[selectedCity]?.length ?? 0,
@@ -209,7 +207,7 @@ class _TheaterPageState extends State<TheaterPage> {
                           ),
                           elevation: 3,
                           margin: const EdgeInsets.symmetric(vertical: 6),
-                          color: Colors.grey[200], // warna abu-abu lembut
+                          color: Colors.grey[200], 
                           child: ExpansionTile(
                             title: Text(
                               theaterName,
